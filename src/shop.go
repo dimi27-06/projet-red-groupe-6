@@ -32,9 +32,18 @@ func (player *Character) shop() {
 				fmt.Println("❌ Vous n'avez pas assez d'écus pour acheter cette potion.")
 			}
 		}
+	case 2:
+		if player.Gold >= 15 {
+			player.addInventory("Potion de poison", 1)
+			player.Gold -= 15
+			fmt.Println("💰Vous avez acheté une Potion de poison pour 10 écus.")
+		} else {
+			fmt.Println("❌ Vous n'avez pas assez d'écus pour acheter cette potion.")
+		}
 	case 0:
 		fmt.Println(Red + "Vous quittez le shop." + Reset)
 	default:
 		fmt.Println(Red + "Choix invalide." + Reset)
+
 	}
 }
