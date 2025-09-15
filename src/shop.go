@@ -11,6 +11,7 @@ func (player *Character) shop() {
 	} else {
 		fmt.Println("1 - Potion de vie (10 écus)")
 	}
+	fmt.Println("2 - Potion de poison (15 écus)")
 	fmt.Println("0 - Quitter")
 	fmt.Print("Votre choix : ")
 	fmt.Scan(&choix)

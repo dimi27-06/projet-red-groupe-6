@@ -20,8 +20,9 @@ func (player *Character) MenuInventory() {
 		player.accessInventory()
 		fmt.Println("=== Menu inventaire ===")
 		fmt.Printf("\t1 - Utiliser une potion de vie\n")
+		fmt.Printf("\t2 - Utiliser une potion de poison\n")
 		fmt.Printf("\t0 - Retour\n")
-		fmt.Print("Sélectionner un choix (1 ou 0) : ")
+		fmt.Print("Sélectionner un choix (1, 2, 0) : ")
 
 		var userChose int
 		_, err := fmt.Scan(&userChose)
