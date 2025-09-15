@@ -11,12 +11,14 @@ func (player *Character) MainMenu() {
 		fmt.Println("=== Menu principal ===")
 		fmt.Printf("\t1 - Afficher les informations du personnage\n")
 		fmt.Printf("\t2 - Accéder au contenu de l’inventaire\n")
+		fmt.Printf("\t3 - Shop\n")
 		fmt.Printf("\t0 - Quitter\n")
 		fmt.Print("Sélectionner un choix (1,2 ou 0) : ")
 
 		var userChose int
-		_, err := fmt.Scanln(&userChose)
+		_, err := fmt.Scan(&userChose)
 		if err != nil {
+			fmt.Println(err.Error())
 			fmt.Println("⚠️ Entrée invalide, tape un nombre.")
 			continue
 		}
@@ -26,6 +28,8 @@ func (player *Character) MainMenu() {
 			player.displayInfo()
 		case 2:
 			player.MenuInventory()
+		case 3:
+			player.shop()
 		case 0:
 			fmt.Println("👋 Au revoir !")
 			os.Exit(0)
