@@ -109,12 +109,12 @@ Gimli représente la fierté et la force du peuple nain, toujours prêt à défe
 
 // Affichage infos personnage
 func (player Character) displayInfo() {
-	fmt.Println("=== Information du personnage ===")
+	fmt.Println(Cyan + "=== Information du personnage ===" + Reset)
 	fmt.Printf("\t - Nom : %s\n", player.Nom)
 	fmt.Printf("\t - Classe : %s\n", player.Classe)
 	fmt.Printf("\t - Niveau : %d\n", player.Niveau)
 	fmt.Printf("\t - Pv : %d/%d\n", player.Pv, player.PvMax)
-	fmt.Println("\t - Inventaire :")
+	fmt.Println(Cyan + "\t - Inventaire :" + Reset)
 	for _, item := range player.Inventaire {
 		fmt.Printf("\t   * %s (x%d)\n", item.Nom, item.Quantite)
 	}
@@ -141,7 +141,7 @@ func choisirPersonnage() Character {
 	case 3:
 		perso.initGimli()
 	default:
-		fmt.Println("Choix invalide, Aragorn est sélectionné par défaut.")
+		fmt.Println(Red + "Choix invalide, Aragorn est sélectionné par défaut." + Reset)
 		perso.initAragorn()
 	}
 	return perso

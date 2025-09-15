@@ -5,14 +5,14 @@ import "fmt"
 func (player *Character) shop() {
 	var choix int
 
-	fmt.Println(Green + "=== Shop ===" + Reset)
-	fmt.Println(Green + "Bienvenue chez Sylvebarbe l'Ent" + Reset)
+	fmt.Println(Cyan + "=== Shop ===" + Reset)
+	fmt.Println(Cyan + "Bienvenue chez Sylvebarbe l'Ent" + Reset)
 	if player.FreePotion {
-		fmt.Println("1 - Potion de vie (gratuite)")
+		fmt.Println(Pink + "1 - Potion de vie (gratuite)" + Reset)
 	} else {
-		fmt.Println("1 - Potion de vie (10 écus)")
+		fmt.Println(Pink + "1 - Potion de vie (10 écus)" + Reset)
 	}
-	fmt.Println("0 - Quitter")
+	fmt.Println(Red + "0 - Quitter" + Reset)
 	fmt.Print("Votre choix : ")
 	fmt.Scan(&choix)
 
@@ -20,7 +20,7 @@ func (player *Character) shop() {
 	case 1:
 		if player.FreePotion {
 			player.addInventory("Potion de vie", 1)
-			fmt.Println("🎉 Vous avez obtenu : Potion de vie (gratuite) !")
+			fmt.Println(Pink + "🎉 Vous avez obtenu : Potion de vie (gratuite) !" + Reset)
 			player.FreePotion = false
 		} else {
 			if player.Gold >= 10 {
@@ -32,8 +32,8 @@ func (player *Character) shop() {
 			}
 		}
 	case 0:
-		fmt.Println("Vous quittez le shop.")
+		fmt.Println(Red + "Vous quittez le shop." + Reset)
 	default:
-		fmt.Println("Choix invalide.")
+		fmt.Println(Red + "Choix invalide." + Reset)
 	}
 }

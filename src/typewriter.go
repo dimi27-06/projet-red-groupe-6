@@ -15,6 +15,7 @@ const (
 	Cyan      = "\033[36m"
 	Bold      = "\033[1m"
 	Underline = "\033[4m"
+	Pink      = "\033[35m"
 )
 
 func typeWriter(str string, delay time.Duration) {
