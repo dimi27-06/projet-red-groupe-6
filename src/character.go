@@ -35,6 +35,7 @@ func (player *Character) initAragorn() {
 		Inventaire: []Item{
 			{"Épée Andúril", 1},
 			{"Potion de vie", 0},
+			{"Potion de poison", 0},
 		},
 		FreePotion: true,
 		Gold:       0,
