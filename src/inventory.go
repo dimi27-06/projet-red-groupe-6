@@ -24,12 +24,12 @@ func (player *Character) MenuInventory() {
 		fmt.Print("Sélectionner un choix (1 ou 0) : ")
 
 		var userChose int
-		_, err := fmt.Scanln(&userChose)
+		_, err := fmt.Scan(&userChose)
 		if err != nil {
+			fmt.Println(err.Error())
 			fmt.Println("⚠️ Entrée invalide, tape un nombre.")
 			continue
 		}
-
 		switch userChose {
 		case 1:
 			player.takePot()
@@ -37,6 +37,30 @@ func (player *Character) MenuInventory() {
 			return
 		default:
 			fmt.Println("Erreur : choix non valide")
+		}
+	}
+}
+
+func (player *Character) addInventory(nom string, quantite int) {
+	for i, item := range player.Inventaire {
+		if item.Nom == nom {
+
+			player.Inventaire[i].Quantite += quantite
+			return
+		}
+	}
+	player.Inventaire = append(player.Inventaire, Item{Nom: nom, Quantite: quantite})
+}
+
+func (player *Character) removeInventory(nom string, quantite int) {
+	for i, item := range player.Inventaire {
+		if item.Nom == nom {
+			if player.Inventaire[i].Quantite > quantite {
+				player.Inventaire[i].Quantite -= quantite
+			} else {
+				player.Inventaire = append(player.Inventaire[:i], player.Inventaire[i+1:]...)
+			}
+			return
 		}
 	}
 }

@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"time"
 )
 
 // Structure Personnage
@@ -13,6 +14,8 @@ type Character struct {
 	PvMax       int
 	Inventaire  []Item
 	Description string
+	FreePotion  bool
+	Gold        int
 }
 
 // Structure Item
@@ -33,6 +36,9 @@ func (player *Character) initAragorn() {
 			{"Épée Andúril", 1},
 			{"Potion de vie", 0},
 		},
+		FreePotion: true,
+		Gold:       0,
+
 		Description: `
 Aragorn, également connu sous le nom de Grands-pas,  
 Héritier d'Isildur, il est le descendant direct des rois de Gondor. 
@@ -57,6 +63,8 @@ func (player *Character) initLegolas() {
 			{"Arc elfique", 1},
 			{"Potion de vie", 0},
 		},
+		FreePotion: true,
+		Gold:       0,
 		Description: `Legolas - Le Prince des Elfes Sylvains
 
 Legolas est un Elfe sylvain du royaume de la Forêt Noire, fils du roi Thranduil. 
@@ -78,8 +86,11 @@ func (player *Character) initGimli() {
 		PvMax:  120,
 		Inventaire: []Item{
 			{"Hache de guerre", 1},
+
 			{"Potion de vie", 0},
 		},
+		FreePotion: true,
+		Gold:       0,
 		Description: `Gimli - Le Guerrier Nain de la Montagne
 
 Gimli est un nain du peuple de Durin, fils de Glóin, et l’un des membres de la Communauté de l’Anneau. 
@@ -104,7 +115,9 @@ func (player Character) displayInfo() {
 	for _, item := range player.Inventaire {
 		fmt.Printf("\t   * %s (x%d)\n", item.Nom, item.Quantite)
 	}
-	fmt.Printf("\t - Description : %s\n", player.Description)
+
+	fmt.Print("\t - Description : ")
+	TypeWriter(player.Description, 4*time.Millisecond)
 }
 
 // Fonction de sélection du personnage
