@@ -8,7 +8,7 @@ import (
 // Menu principal
 func (player *Character) MainMenu() {
 	for {
-		fmt.Println("=== Menu principal ===")
+		fmt.Println(Green + "=== Menu principal ===" + Reset)
 		fmt.Printf("\t1 - Afficher les informations du personnage\n")
 		fmt.Printf("\t2 - Accéder au contenu de l’inventaire\n")
 		fmt.Printf("\t3 - Shop\n")
@@ -37,4 +37,5 @@ func (player *Character) MainMenu() {
 			fmt.Println("Erreur : choix non valide")
 		}
 	}
+
 }

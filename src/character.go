@@ -49,6 +49,7 @@ Il manie l'épée légendaire Andúril, reforgée à partir des fragments de Nar
 Aragorn est un leader courageux, doté d'une grande sagesse et d'une force morale exceptionnelle. 
 Il est également le compagnon fidèle de Frodon et de la Communauté de l'Anneau, jouant un rôle crucial dans la défaite de Sauron.`,
 	}
+	typeWriter(player.Description, 4*time.Millisecond)
 }
 
 // Initialisation de Legolas
@@ -74,6 +75,7 @@ Doté d’une vue perçante et d’une ouïe fine, il peut repérer ses ennemis 
 Toujours calme et déterminé, Legolas se distingue aussi par son amitié indéfectible avec Gimli, le nain, démontrant ainsi que les vieilles rivalités entre leurs peuples peuvent être surmontées. 
 Il est un combattant hors pair, agile aussi bien sur terre que dans les environnements difficiles, et joue un rôle crucial dans les batailles de la guerre de l’Anneau.`,
 	}
+	typeWriter(player.Description, 4*time.Millisecond)
 }
 
 // Initialisation de Gimli
@@ -102,6 +104,7 @@ Gimli représente la fierté et la force du peuple nain, toujours prêt à défe
 
 `,
 	}
+	typeWriter(player.Description, 4*time.Millisecond)
 }
 
 // Affichage infos personnage
@@ -116,8 +119,6 @@ func (player Character) displayInfo() {
 		fmt.Printf("\t   * %s (x%d)\n", item.Nom, item.Quantite)
 	}
 
-	fmt.Print("\t - Description : ")
-	TypeWriter(player.Description, 4*time.Millisecond)
 }
 
 // Fonction de sélection du personnage

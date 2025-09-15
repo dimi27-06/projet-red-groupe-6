@@ -6,7 +6,7 @@ import "fmt"
 func (player *Character) takePot() {
 	for index := range player.Inventaire {
 		if player.Inventaire[index].Nom == "Potion de vie" && player.Inventaire[index].Quantite > 0 {
-			player.Pv += 50
+			player.Pv += 20
 			if player.Pv > player.PvMax {
 				player.Pv = player.PvMax
 			}

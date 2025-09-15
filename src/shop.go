@@ -5,7 +5,8 @@ import "fmt"
 func (player *Character) shop() {
 	var choix int
 
-	fmt.Println("=== Shop ===")
+	fmt.Println(Green + "=== Shop ===" + Reset)
+	fmt.Println(Green + "Bienvenue chez Sylvebarbe l'Ent" + Reset)
 	if player.FreePotion {
 		fmt.Println("1 - Potion de vie (gratuite)")
 	} else {
