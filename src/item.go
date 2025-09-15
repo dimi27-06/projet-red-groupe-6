@@ -9,11 +9,11 @@ import (
 func (player *Character) takePotS() {
 	for index := range player.Inventaire {
 		if player.Inventaire[index].Nom == "Potion de vie" && player.Inventaire[index].Quantite > 0 {
-			player.Pv += 50
+			player.Pv += 20
 			if player.Pv > player.PvMax {
 				player.Pv = player.PvMax
 			}
-			fmt.Println("Potion de vie utilisée (quantité -1)")
+			fmt.Println(Pink + "Potion de vie utilisée (quantité -1)" + Reset)
 			fmt.Printf("Nouveau Pv : %d\n", player.Pv)
 
 			player.Inventaire[index].Quantite -= 1
@@ -23,7 +23,7 @@ func (player *Character) takePotS() {
 			return
 		}
 	}
-	fmt.Println("Utilisation impossible : potion de vie manquante")
+	fmt.Println(Red + "Utilisation impossible : potion de vie manquante" + Reset)
 }
 
 // Utiliser une potion de poison
@@ -36,7 +36,7 @@ func (player *Character) takePotP() {
 				player.IsDead()
 				return
 			}
-			fmt.Println("Potion de vie utilisée (quantité -1)")
+			fmt.Println(Green + "Potion de poison utilisée (quantité -1)" + Green)
 			fmt.Printf("Nouveau Pv : %d\n", player.Pv)
 
 			player.Inventaire[index].Quantite -= 1
@@ -46,5 +46,5 @@ func (player *Character) takePotP() {
 			return
 		}
 	}
-	fmt.Println("Utilisation impossible : potion de poison manquante")
+	fmt.Println(Red + "Utilisation impossible : potion de poison manquante" + Reset)
 }

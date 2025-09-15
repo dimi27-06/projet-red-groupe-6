@@ -4,7 +4,7 @@ import "fmt"
 
 // Affiche l’inventaire
 func (player Character) accessInventory() {
-	fmt.Println("=== Inventaire du personnage ===")
+	fmt.Println(Cyan + "=== Inventaire du personnage ===" + Reset)
 	if len(player.Inventaire) == 0 {
 		fmt.Println("\tInventaire vide")
 	} else {
@@ -28,7 +28,7 @@ func (player *Character) MenuInventory() {
 		_, err := fmt.Scan(&userChose)
 		if err != nil {
 			fmt.Println(err.Error())
-			fmt.Println("⚠️ Entrée invalide, tape un nombre.")
+			fmt.Println(Red + "⚠️ Entrée invalide, tape un nombre." + Reset)
 			continue
 		}
 		switch userChose {
@@ -39,7 +39,7 @@ func (player *Character) MenuInventory() {
 		case 0:
 			return
 		default:
-			fmt.Println("Erreur : choix non valide")
+			fmt.Println(Red + "Erreur : choix non valide" + Reset)
 		}
 	}
 }
