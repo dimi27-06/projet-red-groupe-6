@@ -33,7 +33,8 @@ func (player *Character) takePotP() {
 			player.Pv -= 10
 			time.Sleep(3 * time.Second)
 			if player.Pv <= 0 {
-				return ((func(player *Character) IsDead.))
+				player.IsDead()
+				return
 			}
 			fmt.Println("Potion de vie utilisée (quantité -1)")
 			fmt.Printf("Nouveau Pv : %d\n", player.Pv)
