@@ -31,8 +31,10 @@ func (player *Character) MenuInventory() {
 		}
 
 		switch userChose {
+		case 2:
+			player.takePotP()
 		case 1:
-			player.takePot()
+			player.takePotS()
 		case 0:
 			return
 		default:
