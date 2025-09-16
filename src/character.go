@@ -5,17 +5,34 @@ import (
 	"time"
 )
 
+type Skill struct {
+	Nom      string
+	Degats   int
+	CoutMana int
+	Special  bool
+}
+
 // Structure Personnage
 type Character struct {
-	Nom         string
-	Classe      string
-	Niveau      int
-	Pv          int
-	PvMax       int
-	Inventaire  []Item
-	Description string
-	FreePotion  bool
-	Gold        int
+	Nom            string
+	Classe         string
+	Niveau         int
+	Pv             int
+	PvMax          int
+	Mana           int
+	ManaMax        int
+	Inventaire     []Item
+	Description    string
+	FreePotion     bool
+	Gold           int
+	Skills         []Skill
+	ShopUnlocked   bool
+	HasResurrected bool
+	BaseAttackName string
+	BaseAttackDmg  int
+	SkillName      string
+	SkillDmg       int
+	SkillManaCost  int
 }
 
 // Structure Item
@@ -27,18 +44,27 @@ type Item struct {
 // Initialisation d'Aragorn
 func (player *Character) initAragorn() {
 	*player = Character{
-		Nom:    "Aragorn",
-		Classe: "Humain",
-		Niveau: 1,
-		Pv:     100,
-		PvMax:  100,
+		Nom:     "Aragorn",
+		Classe:  "Humain",
+		Niveau:  1,
+		Pv:      1,
+		PvMax:   100,
+		Mana:    0,
+		ManaMax: 90,
 		Inventaire: []Item{
 			{"Épée Andúril", 1},
 			{"Potion de vie", 0},
 			{"Potion de poison", 0},
 		},
+
 		FreePotion: true,
 		Gold:       0,
+
+		BaseAttackName: "Coup d’épée",
+		BaseAttackDmg:  2,
+		SkillName:      "L'épée enflammée",
+		SkillDmg:       50,
+		SkillManaCost:  90,
 
 		Description: `
 Aragorn, également connu sous le nom de Grands-pas,  
@@ -51,6 +77,7 @@ Aragorn est un leader courageux, doté d'une grande sagesse et d'une force moral
 Il est également le compagnon fidèle de Frodon et de la Communauté de l'Anneau, jouant un rôle crucial dans la défaite de Sauron.`,
 	}
 	typeWriter(player.Description, 4*time.Millisecond)
+
 }
 
 // Initialisation de Legolas
@@ -65,8 +92,14 @@ func (player *Character) initLegolas() {
 			{"Arc elfique", 1},
 			{"Potion de vie", 0},
 		},
-		FreePotion: true,
-		Gold:       0,
+		FreePotion:     true,
+		Gold:           0,
+		BaseAttackName: "Tir à l’arc",
+		BaseAttackDmg:  30,
+		SkillName:      "Flèches empoisonnées",
+		SkillDmg:       60,
+		SkillManaCost:  90,
+
 		Description: `Legolas - Le Prince des Elfes Sylvains
 
 Legolas est un Elfe sylvain du royaume de la Forêt Noire, fils du roi Thranduil. 
@@ -92,8 +125,14 @@ func (player *Character) initGimli() {
 
 			{"Potion de vie", 0},
 		},
-		FreePotion: true,
-		Gold:       0,
+		FreePotion:     true,
+		Gold:           0,
+		BaseAttackName: "Coup de hache",
+		BaseAttackDmg:  15,
+		SkillName:      "Lancer de nain",
+		SkillDmg:       75,
+		SkillManaCost:  90,
+
 		Description: `Gimli - Le Guerrier Nain de la Montagne
 
 Gimli est un nain du peuple de Durin, fils de Glóin, et l’un des membres de la Communauté de l’Anneau. 

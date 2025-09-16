@@ -11,9 +11,12 @@ func (player *Character) MainMenu() {
 		fmt.Println(Cyan + "=== Menu principal ===" + Reset)
 		fmt.Printf("\t1 - Afficher les informations du personnage\n")
 		fmt.Printf("\t2 - Accéder au contenu de l’inventaire\n")
-		fmt.Printf("\t3 - Shop\n")
+		fmt.Printf("\t3 - Sauver les hobbits (Combat)\n")
+		if player.ShopUnlocked {
+			fmt.Println("\t4 - Shop\n")
+		}
 		fmt.Printf(Red + "\t0 - Quitter\n" + Reset)
-		fmt.Print("Sélectionner un choix (1,2 ou 0) : ")
+		fmt.Print("Sélectionner un choix (1,2,3ou 0) : ")
 
 		var userChose int
 		_, err := fmt.Scan(&userChose)
@@ -29,7 +32,14 @@ func (player *Character) MainMenu() {
 		case 2:
 			player.MenuInventory()
 		case 3:
-			player.shop()
+			combatOrcs(player)
+			player.ShopUnlocked = true
+		case 4:
+			if player.ShopUnlocked {
+				player.shop()
+			} else {
+				fmt.Println(Red + "❌ Le shop n'est pas encore disponible." + Reset)
+			}
 		case 0:
 			fmt.Println("👋 Au revoir !")
 			os.Exit(0)

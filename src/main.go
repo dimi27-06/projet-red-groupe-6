@@ -48,4 +48,7 @@ func main() {
 	player.displayInfo() // Affichage des infos du personnage
 
 	player.MainMenu() // Menu principal
+
+	player.choisirAttaque()
+	player.choisirAttaque()
 }
