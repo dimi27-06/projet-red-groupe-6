@@ -48,3 +48,24 @@ func (player *Character) takePotP() {
 	}
 	fmt.Println(Red + "Utilisation impossible : potion de poison manquante" + Reset)
 }
+
+// Utiliser une potion de mana
+func (player *Character) takePotM() {
+	for index := range player.Inventaire {
+		if player.Inventaire[index].Nom == "Potion de mana" && player.Inventaire[index].Quantite > 0 {
+			player.Mana += 30
+			if player.Mana > player.ManaMax {
+				player.Mana = player.ManaMax
+			}
+			fmt.Println(Pink + "Potion de Mana utilisée (quantité -1)" + Reset)
+			fmt.Printf("Nouveau Mana : %d\n", player.Mana)
+			player.Inventaire[index].Quantite -= 1
+			if player.Inventaire[index].Quantite <= 0 {
+				player.Inventaire = append(player.Inventaire[:index], player.Inventaire[index+1:]...)
+			}
+			return
+		}
+
+	}
+	fmt.Println(Red + "Utilisation impossible : potion de Mana manquante" + Reset)
+}

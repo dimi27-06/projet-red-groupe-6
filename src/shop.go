@@ -40,6 +40,38 @@ func (player *Character) shop() {
 		} else {
 			fmt.Println("❌ Vous n'avez pas assez d'écus pour acheter cette potion.")
 		}
+	case 3:
+		if player.Gold >= 20 {
+			player.addInventory("Fourrure de loup", 1)
+			player.Gold -= 20
+			fmt.Println("💰Vous avez acheté une Fourrure de loup pour 20 écus.")
+		} else {
+			fmt.Println("❌ Vous n'avez pas assez d'écus pour acheter une fourrure.")
+		}
+	case 4:
+		if player.Gold >= 35 {
+			player.addInventory("Peau de troll", 1)
+			player.Gold -= 35
+			fmt.Println("💰Vous avez acheté une Peau de troll pour 35 écus.")
+		} else {
+			fmt.Println("❌ Vous n'avez pas assez d'écus pour acheter une Peau de troll.")
+		}
+	case 5:
+		if player.Gold >= 25 {
+			player.addInventory("Cuir de sanglier", 1)
+			player.Gold -= 25
+			fmt.Println("💰Vous avez acheté du Cuir de sanglier pour 25 écus.")
+		} else {
+			fmt.Println("❌ Vous n'avez pas assez d'écus pour acheter ce Cuir.")
+		}
+	case 6:
+		if player.Gold >= 15 {
+			player.addInventory("Plume de Corbeau", 1)
+			player.Gold -= 15
+			fmt.Println("💰Vous avez acheté une Plume de Corbeau pour 15 écus.")
+		} else {
+			fmt.Println("❌ Vous n'avez pas assez d'écus pour acheter cette Plume.")
+		}
 	case 0:
 		fmt.Println(Red + "Vous quittez le shop." + Reset)
 	default:
