@@ -13,7 +13,7 @@ func (player *Character) MainMenu() {
 		fmt.Printf("\t2 - Accéder au contenu de l’inventaire\n")
 		fmt.Printf("\t3 - Shop\n")
 		fmt.Printf(Red + "\t0 - Quitter\n" + Reset)
-		fmt.Print("Sélectionner un choix (1,2 ou 0) : ")
+		fmt.Print("Sélectionner un choix (1,2,3 ou 0) : ")
 
 		var userChose int
 		_, err := fmt.Scan(&userChose)
