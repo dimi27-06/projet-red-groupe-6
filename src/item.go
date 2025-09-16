@@ -65,7 +65,6 @@ func (player *Character) takePotM() {
 			}
 			return
 		}
-
 	}
 	fmt.Println(Red + "Utilisation impossible : potion de Mana manquante" + Reset)
 }
