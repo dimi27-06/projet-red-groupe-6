@@ -47,7 +47,7 @@ func (player *Character) initAragorn() {
 		Nom:     "Aragorn",
 		Classe:  "Humain",
 		Niveau:  1,
-		Pv:      100,
+		Pv:      1,
 		PvMax:   100,
 		Mana:    0,
 		ManaMax: 90,
@@ -61,7 +61,7 @@ func (player *Character) initAragorn() {
 		Gold:       0,
 
 		BaseAttackName: "Coup d’épée",
-		BaseAttackDmg:  20,
+		BaseAttackDmg:  2,
 		SkillName:      "L'épée enflammée",
 		SkillDmg:       50,
 		SkillManaCost:  90,

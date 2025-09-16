@@ -13,6 +13,10 @@ func (player *Character) shop() {
 		fmt.Println(Pink + "1 - Potion de vie (10 écus)" + Reset)
 	}
 	fmt.Println(Green + "2 - Potion de poison (15 écus)" + Reset)
+	fmt.Println(Green + "3 - Fourrure de loup (20 écus)" + Reset)
+	fmt.Println(Green + "4 - Peau de troll (35 écus)" + Reset)
+	fmt.Println(Green + "5 - Cuir de sanglier (25 écus)" + Reset)
+	fmt.Println(Green + "6 - Plume de corbeau (15 écus)" + Reset)
 	fmt.Println(Red + "0 - Quitter" + Reset)
 	fmt.Print("Votre choix : ")
 	fmt.Scan(&choix)
