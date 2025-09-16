@@ -68,8 +68,10 @@ func (player *Character) removeInventory(nom string, quantite int) {
 }
 
 func (player *Character) limitInventory(nom string, quantite int) {
-	if player.Inventaire[i].Quantite > 10 {
-		player.removeInventory(nom, quantite)
+	for i := 0; i < 10; i++ {
 
+		if player.Inventaire[i].Quantite > 10 {
+			fmt.Println("Inventaire plein")
+		}
 	}
 }
