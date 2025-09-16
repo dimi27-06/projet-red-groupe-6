@@ -109,7 +109,10 @@ func combatOrcs(player *Character) {
 		if orcPv <= 0 {
 			fmt.Println(Green + "🎉 Vous avez vaincu les orcs, bien joué ! Le shop Maison de Sylvebarbe est maintenant disponible. " + Reset)
 			player.ShopUnlocked = true
+			player.Gold += 100
+			fmt.Println(Yellow + "Vous avez gagné 100 pièces d’or !" + Reset)
 			return
+
 		}
 
 		// --- Tour des orcs ---

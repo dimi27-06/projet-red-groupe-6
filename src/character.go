@@ -47,9 +47,9 @@ func (player *Character) initAragorn() {
 		Nom:     "Aragorn",
 		Classe:  "Humain",
 		Niveau:  1,
-		Pv:      1,
+		Pv:      100,
 		PvMax:   100,
-		Mana:    0,
+		Mana:    90,
 		ManaMax: 90,
 		Inventaire: []Item{
 			{"Épée Andúril", 1},
@@ -58,10 +58,10 @@ func (player *Character) initAragorn() {
 		},
 
 		FreePotion: true,
-		Gold:       0,
+		Gold:       1000,
 
 		BaseAttackName: "Coup d’épée",
-		BaseAttackDmg:  2,
+		BaseAttackDmg:  20,
 		SkillName:      "L'épée enflammée",
 		SkillDmg:       50,
 		SkillManaCost:  90,
@@ -147,21 +147,18 @@ Gimli représente la fierté et la force du peuple nain, toujours prêt à défe
 	typeWriter(player.Description, 4*time.Millisecond)
 }
 
-// Affichage infos personnage
+// Affichage infos persoooo
 func (player Character) displayInfo() {
 	fmt.Println(Cyan + "=== Information du personnage ===" + Reset)
 	fmt.Printf("\t - Nom : %s\n", player.Nom)
 	fmt.Printf("\t - Classe : %s\n", player.Classe)
 	fmt.Printf("\t - Niveau : %d\n", player.Niveau)
 	fmt.Printf("\t - Pv : %d/%d\n", player.Pv, player.PvMax)
-	fmt.Println(Cyan + "\t - Inventaire :" + Reset)
-	for _, item := range player.Inventaire {
-		fmt.Printf("\t   * %s (x%d)\n", item.Nom, item.Quantite)
-	}
-
+	fmt.Printf("\t - Mana : %d/%d\n", player.Mana, player.ManaMax)
+	fmt.Printf("\t - Gold : %d\n", player.Gold)
 }
 
-// Fonction de sélection du personnage
+// sélection du personnage
 func choisirPersonnage() Character {
 	var choix int
 	var perso Character

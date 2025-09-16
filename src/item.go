@@ -5,7 +5,6 @@ import (
 	"time"
 )
 
-// Utiliser une potion de vie
 func (player *Character) takePotS() {
 	for index := range player.Inventaire {
 		if player.Inventaire[index].Nom == "Potion de vie" && player.Inventaire[index].Quantite > 0 {
@@ -26,7 +25,6 @@ func (player *Character) takePotS() {
 	fmt.Println(Red + "Utilisation impossible : potion de vie manquante" + Reset)
 }
 
-// Utiliser une potion de poison
 func (player *Character) takePotP() {
 	for index := range player.Inventaire {
 		if player.Inventaire[index].Nom == "Potion de poison" && player.Inventaire[index].Quantite > 0 {
@@ -49,7 +47,6 @@ func (player *Character) takePotP() {
 	fmt.Println(Red + "Utilisation impossible : potion de poison manquante" + Reset)
 }
 
-// Utiliser une potion de mana
 func (player *Character) TakePotM() {
 	for index := range player.Inventaire {
 		if player.Inventaire[index].Nom == "Potion de mana" && player.Inventaire[index].Quantite > 0 {
@@ -57,7 +54,7 @@ func (player *Character) TakePotM() {
 			if player.Mana > player.ManaMax {
 				player.Mana = player.ManaMax
 			}
-			fmt.Println(Pink + "Potion de Mana utilisée (quantité -1)" + Reset)
+			fmt.Println(Blue + "Potion de Mana utilisée (quantité -1)" + Reset)
 			fmt.Printf("Nouveau Mana : %d\n", player.Mana)
 			player.Inventaire[index].Quantite -= 1
 			if player.Inventaire[index].Quantite <= 0 {

@@ -20,8 +20,10 @@ func (player *Character) MenuInventory() {
 		player.accessInventory()
 		fmt.Println(Cyan + "=== Menu inventaire ===" + Reset)
 		fmt.Printf(Pink + "\t1 - Utiliser une potion de vie\n" + Reset)
+		fmt.Printf(Green + "\t2 - Utiliser une potion de poison\n" + Reset)
+		fmt.Printf(Blue + "\t3 - Utiliser une potion de mana\n" + Reset)
 		fmt.Printf(Red + "\t0 - Retour\n" + Reset)
-		fmt.Print("Sélectionner un choix (1 , 2 ou 0) : ")
+		fmt.Print("Sélectionner un choix ) : ")
 
 		var userChose int
 		_, err := fmt.Scan(&userChose)
@@ -31,10 +33,12 @@ func (player *Character) MenuInventory() {
 			continue
 		}
 		switch userChose {
-		case 2:
-			player.takePotP()
 		case 1:
 			player.takePotS()
+		case 2:
+			player.takePotP()
+		case 3:
+			player.TakePotM()
 		case 0:
 			return
 		default:

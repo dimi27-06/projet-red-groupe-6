@@ -13,10 +13,11 @@ func (player *Character) shop() {
 		fmt.Println(Pink + "1 - Potion de vie (10 écus)" + Reset)
 	}
 	fmt.Println(Green + "2 - Potion de poison (15 écus)" + Reset)
-	fmt.Println(Green + "3 - Fourrure de loup (20 écus)" + Reset)
-	fmt.Println(Green + "4 - Peau de troll (35 écus)" + Reset)
-	fmt.Println(Green + "5 - Cuir de sanglier (25 écus)" + Reset)
-	fmt.Println(Green + "6 - Plume de corbeau (15 écus)" + Reset)
+	fmt.Println(Blue + "3 - potion de mana (20 écus)" + Reset)
+	fmt.Println("4 - Fourrure de loup (20 écus)")
+	fmt.Println("5 - Peau de troll (35 écus)")
+	fmt.Println("6 - Cuir de sanglier (25 écus)")
+	fmt.Println("7 - Plume de corbeau (15 écus)")
 	fmt.Println(Red + "0 - Quitter" + Reset)
 	fmt.Print("Votre choix : ")
 	fmt.Scan(&choix)
@@ -45,6 +46,16 @@ func (player *Character) shop() {
 			fmt.Println("❌ Vous n'avez pas assez d'écus pour acheter cette potion.")
 		}
 	case 3:
+		if player.Gold >= 15 {
+			player.addInventory("Potion de mana", 1)
+			player.Gold -= 20
+			fmt.Println("💰Vous avez acheté une Potion de poison pour 20 écus.")
+		} else {
+			fmt.Println("❌ Vous n'avez pas assez d'écus pour acheter cette potion.")
+
+		}
+	case 4:
+
 		if player.Gold >= 20 {
 			player.addInventory("Fourrure de loup", 1)
 			player.Gold -= 20
@@ -52,7 +63,7 @@ func (player *Character) shop() {
 		} else {
 			fmt.Println("❌ Vous n'avez pas assez d'écus pour acheter une fourrure.")
 		}
-	case 4:
+	case 5:
 		if player.Gold >= 35 {
 			player.addInventory("Peau de troll", 1)
 			player.Gold -= 35
@@ -60,7 +71,7 @@ func (player *Character) shop() {
 		} else {
 			fmt.Println("❌ Vous n'avez pas assez d'écus pour acheter une Peau de troll.")
 		}
-	case 5:
+	case 6:
 		if player.Gold >= 25 {
 			player.addInventory("Cuir de sanglier", 1)
 			player.Gold -= 25
@@ -68,7 +79,7 @@ func (player *Character) shop() {
 		} else {
 			fmt.Println("❌ Vous n'avez pas assez d'écus pour acheter ce Cuir.")
 		}
-	case 6:
+	case 7:
 		if player.Gold >= 15 {
 			player.addInventory("Plume de Corbeau", 1)
 			player.Gold -= 15
