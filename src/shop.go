@@ -44,6 +44,5 @@ func (player *Character) shop() {
 		fmt.Println(Red + "Vous quittez le shop." + Reset)
 	default:
 		fmt.Println(Red + "Choix invalide." + Reset)
-
 	}
 }
