@@ -16,7 +16,7 @@ func (player *Character) MainMenu() {
 			fmt.Println("\t4 - Shop\n")
 		}
 		fmt.Printf(Red + "\t0 - Quitter\n" + Reset)
-		fmt.Print("Sélectionner un choix (1,2,3ou 0) : ")
+		fmt.Print("Sélectionner un choix (1,2,3 ou 0) : ")
 
 		var userChose int
 		_, err := fmt.Scan(&userChose)
