@@ -10,31 +10,53 @@ import (
 	"github.com/faiface/beep/speaker"
 )
 
-// Joue le son sans bloquer le programme
-func playSoundAsync() {
-	f, err := os.Open("./assets/hobbit.mp3")
-	if err != nil {
-		return
-	}
+var ctrl *beep.Ctrl // contrôle global de la musique en cours
 
-	streamer, format, err := mp3.Decode(f)
-	if err != nil {
-		return
-	}
-
-	speaker.Init(format.SampleRate, format.SampleRate.N(time.Millisecond*50))
-
-	speaker.Play(beep.Seq(streamer, beep.Callback(func() {
-		// Nettoyage à la fin du son
-		streamer.Close()
-		f.Close()
-	})))
+// Initialise le speaker UNE SEULE FOIS
+func initSpeaker() {
+	// on initialise avec une valeur par défaut
+	sr := beep.SampleRate(44100)
+	speaker.Init(sr, sr.N(time.Millisecond*50))
 }
 
-// Affiche un texte progressivement, un caractère à la fois
-func printSlowly(text string, delay time.Duration) {
-	for _, char := range text {
-		fmt.Printf("%c", char)
-		time.Sleep(delay)
+// Lance une musique en boucle
+func playMusic(path string) {
+	stopSound() // coupe la musique précédente
+
+	f, err := os.Open(path)
+	if err != nil {
+		fmt.Println("Erreur ouverture fichier :", err)
+		return
 	}
+
+	streamer, _, err := mp3.Decode(f)
+	if err != nil {
+		fmt.Println("Erreur décodage mp3 :", err)
+		return
+	}
+
+	// Crée un contrôleur pour pouvoir stopper la musique plus tard
+	ctrl = &beep.Ctrl{Streamer: beep.Loop(-1, streamer), Paused: false}
+
+	// Joue la musique
+	speaker.Play(ctrl)
+}
+
+// Stoppe la musique en cours
+func stopSound() {
+	if ctrl != nil {
+		speaker.Lock()
+		ctrl.Streamer = nil
+		ctrl.Paused = true
+		speaker.Unlock()
+	}
+}
+
+// Fonctions spécifiques
+func playSoundAsyncDebut() {
+	playMusic("./assets/hobbit.mp3")
+}
+
+func playSoundAsyncCombat() {
+	playMusic("./assets/Combat.mp3")
 }

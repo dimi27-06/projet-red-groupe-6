@@ -13,7 +13,7 @@ func (player *Character) MainMenu() {
 		fmt.Printf("\t2 - Accéder au contenu de l’inventaire\n")
 		fmt.Printf("\t3 - Sauver les hobbits (Combat)\n")
 		if player.ShopUnlocked {
-			fmt.Println("\t4 - Shop\n")
+			fmt.Println("\t4 - Shop")
 		}
 		fmt.Printf(Red + "\t0 - Quitter\n" + Reset)
 		fmt.Print("Sélectionner un choix : ")

@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"os"
 )
 
 func gameOver() {
@@ -16,5 +15,4 @@ func gameOver() {
     ` + Reset)
 
 	fmt.Println("☠️ GAME OVER ☠️ Merci d'avoir joué !")
-	os.Exit(0) // stoppe le programme
 }

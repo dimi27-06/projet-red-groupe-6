@@ -3,7 +3,8 @@ package main
 import "fmt"
 
 func main() {
-	playSoundAsync()
+	initSpeaker()
+	playSoundAsyncDebut()
 	acsii := `@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -43,12 +44,16 @@ func main() {
 
 	fmt.Println(acsii)
 
-	player := choisirPersonnage() // Création du personnage choisi par le joueur
+	player := choisirPersonnage()
 
-	player.displayInfo() // Affichage des infos du personnage
+	player.displayInfo()
 
-	player.MainMenu() // Menu principal
+	player.MainMenu()
 
 	player.choisirAttaque()
+
 	player.choisirAttaque()
+
+	combatOrcs(&player)
+
 }

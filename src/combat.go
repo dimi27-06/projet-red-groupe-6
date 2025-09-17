@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"time"
+)
 
 func (player *Character) choisirAttaque() {
 	var choix int
@@ -53,8 +56,15 @@ func (player *Character) AttackSkill(skillName string) {
 }
 
 func combatOrcs(player *Character) {
-	fmt.Println(Yellow + "\n Début de l’histoire " + Reset)
-	fmt.Println("Aragorn, Gimli et Legolas, après avoir parcouru les collines d’Emyn Muil, arrivent en lisière de la Forêt de Fangorn. Ils savent que deux Hobbits de la Communauté – Merry et Pippin – y ont été capturés par des Orques d’Isengard. Leur mission : les retrouver avant que le maléfique Saroumane ou d’autres créatures ne mettent la main sur eux.")
+	stopSound()
+	playSoundAsyncCombat()
+	fmt.Println(Bold, Yellow+"\n Début de l’histoire "+Reset)
+
+	histoire := `Aragorn, Gimli et Legolas, après avoir parcouru les collines d’Emyn Muil, 
+arrivent en lisière de la Forêt de Fangorn. 
+Ils savent que deux Hobbits de la Communauté – Merry et Pippin – y ont été capturés par des Orques d’Isengard. 
+Leur mission : les retrouver avant que le maléfique Saroumane ou d’autres créatures ne mettent la main sur eux.`
+	typeWriter(histoire, 7*time.Millisecond)
 
 	orcPv := 90
 	orcDegats := 8
@@ -73,8 +83,6 @@ func combatOrcs(player *Character) {
 				return
 			}
 		}
-
-		// --- Tour du joueur ---
 		fmt.Println(Cyan + "\n=== Tour du joueur ===" + Reset)
 		fmt.Printf("1 - %s (dégâts : %d)\n", player.BaseAttackName, player.BaseAttackDmg)
 		fmt.Printf("2 - %s (dégâts : %d, coût : %d mana)\n", player.SkillName, player.SkillDmg, player.SkillManaCost)
@@ -107,15 +115,16 @@ func combatOrcs(player *Character) {
 		fmt.Printf("👹 PV des orcs restants : %d\n", orcPv)
 
 		if orcPv <= 0 {
+			stopSound()
 			fmt.Println(Green + "🎉 Vous avez vaincu les orcs, bien joué ! Le shop Maison de Sylvebarbe est maintenant disponible. " + Reset)
 			player.ShopUnlocked = true
 			player.Gold += 100
 			fmt.Println(Yellow + "Vous avez gagné 100 pièces d’or !" + Reset)
+			playSoundAsyncDebut()
 			return
 
 		}
 
-		// --- Tour des orcs ---
 		fmt.Println(Cyan + "\n=== Tour des orcs ===" + Reset)
 		player.Pv -= orcDegats
 		if player.Pv < 0 {
@@ -127,6 +136,7 @@ func combatOrcs(player *Character) {
 		if player.Pv <= 0 {
 			player.IsDead()
 			if player.Pv <= 0 {
+				stopSound()
 				fmt.Println(Red + "☠️ Vous êtes tombé définitivement... Les hobbits sont perdus." + Reset)
 
 				gameOver()
