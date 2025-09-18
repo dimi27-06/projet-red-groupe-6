@@ -93,12 +93,27 @@ Leur mission : les retrouver avant que le maléfique Saroumane ou d’autres cr�
 		fmt.Println(Cyan + "\n=== Tour du joueur ===" + Reset)
 		fmt.Printf("1 - %s (dégâts : %d)\n", player.BaseAttackName, player.BaseAttackDmg)
 		fmt.Printf("2 - %s (dégâts : %d, coût : %d mana)\n", player.SkillName, player.SkillDmg, player.SkillManaCost)
-		fmt.Printf("3 - %s (vie régénerer : %d, -1 potion de vie)\n", player.takePotS)
-		fmt.Printf("4 - %s (dégats infligé : %d, -1 potion de poison)\n", player.takePotP)
-		fmt.Printf("5 - %s (mana régénerer : %d, -1 potion de mana)\n", player.TakePotM)
+		fmt.Printf("3 - Potion de vie (vie régénérée : 20, -1 potion de vie)\n")
+		fmt.Printf("4 - Potion de poison (inflige : 10 dégâts, -1 potion de poison)\n")
+		fmt.Printf("5 - Potion de mana (mana régénéré : 30, -1 potion de mana)\n")
 		fmt.Print("Votre choix : ")
 		var choix int
 		fmt.Scan(&choix)
+
+		switch choix {
+		case 1:
+			// attaque de baseeeeee
+		case 2:
+			// attaque spécialeeeee
+		case 3:
+			player.takePotS()
+		case 4:
+			player.takePotP()
+		case 5:
+			player.TakePotM()
+		default:
+			fmt.Println(Red + "❌ Choix invalide !" + Reset)
+		}
 
 		var degats int
 		if choix == 1 {
@@ -187,10 +202,27 @@ func combatTrollEtOrcs(player *Character) {
 		fmt.Println(Cyan + "\n=== Tour du joueur ===" + Reset)
 		fmt.Printf("1 - %s (dégâts : %d)\n", player.BaseAttackName, player.BaseAttackDmg)
 		fmt.Printf("2 - %s (dégâts : %d, coût : %d mana)\n", player.SkillName, player.SkillDmg, player.SkillManaCost)
+		fmt.Printf("3 - Potion de vie (vie régénérée : 20, -1 potion de vie)\n")
+		fmt.Printf("4 - Potion de poison (inflige : 10 dégâts, -1 potion de poison)\n")
+		fmt.Printf("5 - Potion de mana (mana régénéré : 30, -1 potion de mana)\n")
 		fmt.Print("Votre choix : ")
 		var choix int
 		fmt.Scan(&choix)
 
+		switch choix {
+		case 1:
+			// attaque de baseeeeee
+		case 2:
+			// attaque spécialeeeee
+		case 3:
+			player.takePotS()
+		case 4:
+			player.takePotP()
+		case 5:
+			player.TakePotM()
+		default:
+			fmt.Println(Red + "❌ Choix invalide !" + Reset)
+		}
 		var degats int
 		if choix == 1 {
 			degats = player.BaseAttackDmg
