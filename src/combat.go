@@ -6,11 +6,18 @@ import (
 )
 
 func (player *Character) choisirAttaque() {
+
+	player.TakePotM()
+	player.takePotS()
+	player.takePotP()
 	var choix int
 
 	fmt.Println(Cyan + "\n=== Choisissez une attaque ===" + Reset)
 	fmt.Println("1 - Attaque de base")
 	fmt.Println("2 - Attaque spéciale (100 mana)")
+	fmt.Println("3 - Potion de vie")
+	fmt.Println("4 - Potion de poison")
+	fmt.Println("5 - Potion de mana")
 	fmt.Print("Votre choix : ")
 	fmt.Scan(&choix)
 
