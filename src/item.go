@@ -5,7 +5,7 @@ import (
 	"time"
 )
 
-func (player *Character) takePotS() {
+func (player *Character) TakePotS() {
 	for index := range player.Inventaire {
 		if player.Inventaire[index].Nom == "Potion de vie" && player.Inventaire[index].Quantite > 0 {
 			player.Pv += 20
@@ -25,17 +25,19 @@ func (player *Character) takePotS() {
 	fmt.Println(Red + "Utilisation impossible : potion de vie manquante" + Reset)
 }
 
-func (player *Character) takePotP() {
+func (player *Character) TakePotP(orcPv *Character) {
 	for index := range player.Inventaire {
 		if player.Inventaire[index].Nom == "Potion de poison" && player.Inventaire[index].Quantite > 0 {
-			player.Pv -= 10
+			orcPv -= 15
 			time.Sleep(3 * time.Second)
-			if player.Pv <= 0 {
-				player.IsDead()
+			if orcPv <= 0 {
+				combatOrcs.IsDead()
 				return
 			}
+
 			fmt.Println(Green + "Potion de poison utilisée (quantité -1)" + Green)
-			fmt.Printf("Nouveau Pv : %d\n", player.Pv)
+			fmt.Printf("Nouveau Pv : %d\n", orcPv)
+			fmt.Printf("Nouveau Pv : %d\n", ennemiPv)
 
 			player.Inventaire[index].Quantite -= 1
 			if player.Inventaire[index].Quantite <= 0 {

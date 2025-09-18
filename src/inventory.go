@@ -34,9 +34,9 @@ func (player *Character) MenuInventory() {
 		}
 		switch userChose {
 		case 1:
-			player.takePotS()
+			player.TakePotS()
 		case 2:
-			player.takePotP()
+			player.TakePotP()
 		case 3:
 			player.TakePotM()
 		case 0:
