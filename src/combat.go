@@ -53,7 +53,7 @@ func (player *Character) AttackSkill(skillName string) {
 				fmt.Printf("🔥 %s utilise %s et inflige %d dégâts ! (Mana restant : %d/%d)\n",
 					player.Nom, skill.Nom, skill.Degats, player.Mana, player.ManaMax)
 			} else {
-				fmt.Printf("⚔️ %s utilise %s et inflige %d dégâts !\n",
+				fmt.Printf("\n⚔️ %s utilise %s et inflige %d dégâts !\n",
 					player.Nom, skill.Nom, skill.Degats)
 			}
 			return
@@ -177,7 +177,7 @@ func combatTrollEtOrcs(player *Character) {
 	stopSound()
 	playSoundAsyncCombat()
 	fmt.Println(Bold, Yellow+"\n apres avoir vaincu les orcs notre trio continue leurs route mais La forêt devient plus sombre. Après une courte accalmie, deux Orques, accompagnés d’un Troll, attaquent. "+Reset)
-	time.Sleep(2 * time.Second)
+	time.Sleep(4 * time.Second)
 
 	ennemiPv := 200
 	ennemiDegats := 25
@@ -200,11 +200,11 @@ func combatTrollEtOrcs(player *Character) {
 		}
 
 		fmt.Println(Cyan + "\n=== Tour du joueur ===" + Reset)
-		fmt.Printf("1 - %s (dégâts : %d)\n", player.BaseAttackName, player.BaseAttackDmg)
-		fmt.Printf("2 - %s (dégâts : %d, coût : %d mana)\n", player.SkillName, player.SkillDmg, player.SkillManaCost)
-		fmt.Printf("3 - Potion de vie (vie régénérée : 20, -1 potion de vie)\n")
-		fmt.Printf("4 - Potion de poison (inflige : 10 dégâts, -1 potion de poison)\n")
-		fmt.Printf("5 - Potion de mana (mana régénéré : 30, -1 potion de mana)\n")
+		fmt.Printf("\n1 - %s (dégâts : %d)\n", player.BaseAttackName, player.BaseAttackDmg)
+		fmt.Printf("\n2 - %s (dégâts : %d, coût : %d mana)\n", player.SkillName, player.SkillDmg, player.SkillManaCost)
+		fmt.Printf("\n3 - Potion de vie (vie régénérée : 20, -1 potion de vie)\n")
+		fmt.Printf("\n4 - Potion de poison (inflige : 10 dégâts, -1 potion de poison)\n")
+		fmt.Printf("\n5 - Potion de mana (mana régénéré : 30, -1 potion de mana)\n")
 		fmt.Print("Votre choix : ")
 		var choix int
 		fmt.Scan(&choix)
@@ -226,19 +226,16 @@ func combatTrollEtOrcs(player *Character) {
 		var degats int
 		if choix == 1 {
 			degats = player.BaseAttackDmg
-			fmt.Printf("💥 Vous utilisez %s et infligez %d dégâts !\n", player.BaseAttackName, degats)
+			fmt.Printf("\t💥 Vous utilisez %s et infligez %d dégâts !\n", player.BaseAttackName, degats)
 		} else if choix == 2 {
 			if player.Mana >= player.SkillManaCost {
 				degats = player.SkillDmg
 				player.Mana -= player.SkillManaCost
-				fmt.Printf("🔥 Vous utilisez %s et infligez %d dégâts !\n", player.SkillName, degats)
+				fmt.Printf("\n🔥 Vous utilisez %s et infligez %d dégâts !\n", player.SkillName, degats)
 			} else {
 				fmt.Println(Red + "⚠️ Pas assez de mana ! Attaque normale." + Reset)
 				degats = player.BaseAttackDmg
 			}
-		} else {
-			fmt.Println(Red + "❌ Mauvais choix, attaque de base." + Reset)
-			degats = player.BaseAttackDmg
 		}
 
 		ennemiPv -= degats

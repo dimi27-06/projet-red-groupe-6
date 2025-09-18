@@ -28,7 +28,7 @@ func (player *Character) takePotS() {
 func (player *Character) takePotP() {
 	for index := range player.Inventaire {
 		if player.Inventaire[index].Nom == "Potion de poison" && player.Inventaire[index].Quantite > 0 {
-			player.Pv -= 10
+			player.Pv -= 15
 			time.Sleep(3 * time.Second)
 			if player.Pv <= 0 {
 				player.IsDead()
