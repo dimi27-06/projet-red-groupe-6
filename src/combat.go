@@ -224,6 +224,8 @@ func combatTrollEtOrcs(player *Character) {
 			if player.Pv <= 0 {
 				fmt.Println(Red + "☠️ Vous êtes tombé face au Troll et ses orcs..." + Reset)
 				gameOver()
+				playSoundAsyncCombat()
+				playSoundAsyncDebut()
 				return
 			}
 		}
