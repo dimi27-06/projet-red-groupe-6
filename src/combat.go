@@ -93,6 +93,9 @@ Leur mission : les retrouver avant que le maléfique Saroumane ou d’autres cr�
 		fmt.Println(Cyan + "\n=== Tour du joueur ===" + Reset)
 		fmt.Printf("1 - %s (dégâts : %d)\n", player.BaseAttackName, player.BaseAttackDmg)
 		fmt.Printf("2 - %s (dégâts : %d, coût : %d mana)\n", player.SkillName, player.SkillDmg, player.SkillManaCost)
+		fmt.Printf("3 - %s (vie régénerer : %d, -1 potion de vie)\n", player.takePotS)
+		fmt.Printf("4 - %s (dégats infligé : %d, -1 potion de poison)\n", player.takePotP)
+		fmt.Printf("5 - %s (mana régénerer : %d, -1 potion de mana)\n", player.TakePotM)
 		fmt.Print("Votre choix : ")
 		var choix int
 		fmt.Scan(&choix)
