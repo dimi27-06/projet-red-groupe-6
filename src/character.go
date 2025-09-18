@@ -33,6 +33,7 @@ type Character struct {
 	SkillName      string
 	SkillDmg       int
 	SkillManaCost  int
+	TrollUnlocked  bool
 }
 
 // Structure Item

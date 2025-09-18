@@ -120,6 +120,7 @@ Leur mission : les retrouver avant que le maléfique Saroumane ou d’autres cr�
 			player.ShopUnlocked = true
 			player.Gold += 100
 			fmt.Println(Yellow + "Vous avez gagné 100 pièces d’or !" + Reset)
+			player.TrollUnlocked = true
 			playSoundAsyncDebut()
 			return
 
@@ -141,6 +142,88 @@ Leur mission : les retrouver avant que le maléfique Saroumane ou d’autres cr�
 
 				gameOver()
 
+				return
+			}
+		}
+	}
+}
+
+func combatTrollEtOrcs(player *Character) {
+	stopSound()
+	playSoundAsyncCombat()
+	fmt.Println(Bold, Yellow+"\n apres avoir vaincu les orcs notre trio continue leurs route mais La forêt devient plus sombre. Après une courte accalmie, deux Orques, accompagnés d’un Troll, attaquent. "+Reset)
+	time.Sleep(2 * time.Second)
+
+	ennemiPv := 200
+	ennemiDegats := 25
+
+	for {
+		if ennemiPv <= 0 {
+			fmt.Println(Green + "🎉 Victoire ! Vous avez vaincu le Troll et ses orcs !" + Reset)
+			player.Gold += 200
+			fmt.Println(Yellow + "💰 Vous gagnez 200 pièces d’or !" + Reset)
+			return
+		}
+
+		if player.Pv <= 0 {
+			player.IsDead()
+			if player.Pv <= 0 {
+				fmt.Println(Red + "☠️ Le Troll et ses orcs vous ont écrasé... C’est la fin." + Reset)
+				gameOver()
+				return
+			}
+		}
+
+		fmt.Println(Cyan + "\n=== Tour du joueur ===" + Reset)
+		fmt.Printf("1 - %s (dégâts : %d)\n", player.BaseAttackName, player.BaseAttackDmg)
+		fmt.Printf("2 - %s (dégâts : %d, coût : %d mana)\n", player.SkillName, player.SkillDmg, player.SkillManaCost)
+		fmt.Print("Votre choix : ")
+		var choix int
+		fmt.Scan(&choix)
+
+		var degats int
+		if choix == 1 {
+			degats = player.BaseAttackDmg
+			fmt.Printf("💥 Vous utilisez %s et infligez %d dégâts !\n", player.BaseAttackName, degats)
+		} else if choix == 2 {
+			if player.Mana >= player.SkillManaCost {
+				degats = player.SkillDmg
+				player.Mana -= player.SkillManaCost
+				fmt.Printf("🔥 Vous utilisez %s et infligez %d dégâts !\n", player.SkillName, degats)
+			} else {
+				fmt.Println(Red + "⚠️ Pas assez de mana ! Attaque normale." + Reset)
+				degats = player.BaseAttackDmg
+			}
+		} else {
+			fmt.Println(Red + "❌ Mauvais choix, attaque de base." + Reset)
+			degats = player.BaseAttackDmg
+		}
+
+		ennemiPv -= degats
+		if ennemiPv < 0 {
+			ennemiPv = 0
+		}
+		fmt.Printf("👹 PV du Troll + Orcs : %d\n", ennemiPv)
+
+		if ennemiPv <= 0 {
+			fmt.Println(Green + "🎉 Vous avez vaincu le Troll et ses orcs !" + Reset)
+			player.Gold += 200
+			return
+		}
+
+		fmt.Println(Cyan + "\n=== Tour des ennemis ===" + Reset)
+		player.Pv -= ennemiDegats
+		if player.Pv < 0 {
+			player.Pv = 0
+		}
+		fmt.Printf("👹 Le Troll et les orcs frappent %s pour %d dégâts ! (PV : %d/%d)\n",
+			player.Nom, ennemiDegats, player.Pv, player.PvMax)
+
+		if player.Pv <= 0 {
+			player.IsDead()
+			if player.Pv <= 0 {
+				fmt.Println(Red + "☠️ Vous êtes tombé face au Troll et ses orcs..." + Reset)
+				gameOver()
 				return
 			}
 		}

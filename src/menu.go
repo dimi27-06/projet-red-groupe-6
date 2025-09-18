@@ -7,13 +7,17 @@ import (
 
 // Menu principal
 func (player *Character) MainMenu() {
+
 	for {
 		fmt.Println(Cyan + "=== Menu principal ===" + Reset)
 		fmt.Printf("\t1 - Afficher les informations du personnage\n")
 		fmt.Printf("\t2 - Accéder au contenu de l’inventaire\n")
-		fmt.Printf("\t3 - Sauver les hobbits (Combat)\n")
+		fmt.Printf("\t3 - Sauver les hobbits 1/3 (Combat)\n")
+		if player.TrollUnlocked {
+			fmt.Printf("\t4 - Sauver les hobbits 2/3 (Combat)\n")
+		}
 		if player.ShopUnlocked {
-			fmt.Println("\t4 - Shop")
+			fmt.Println("\t5 - Shop")
 		}
 		fmt.Printf(Red + "\t0 - Quitter\n" + Reset)
 		fmt.Print("Sélectionner un choix : ")
@@ -35,6 +39,14 @@ func (player *Character) MainMenu() {
 			combatOrcs(player)
 			player.ShopUnlocked = true
 		case 4:
+			if player.TrollUnlocked {
+				stopSound()
+				playSoundAsyncCombat()
+				combatTrollEtOrcs(player)
+			} else {
+				fmt.Println(Red + "🚫 Combat non disponible !" + Reset)
+			}
+		case 5:
 			if player.ShopUnlocked {
 				player.shop()
 			} else {
