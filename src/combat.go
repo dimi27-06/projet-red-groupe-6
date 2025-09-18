@@ -8,8 +8,9 @@ import (
 func (player *Character) choisirAttaque() {
 
 	player.TakePotM()
-	player.takePotS()
-	player.takePotP()
+	player.TakePotS()
+	var enemyHp int
+	player.TakePotP(&enemyHp)
 	var choix int
 
 	fmt.Println(Cyan + "\n=== Choisissez une attaque ===" + Reset)
@@ -106,9 +107,9 @@ Leur mission : les retrouver avant que le maléfique Saroumane ou d’autres cr�
 		case 2:
 			// attaque spécialeeeee
 		case 3:
-			player.takePotS()
+			player.TakePotS()
 		case 4:
-			player.takePotP()
+			player.TakePotP(&orcPv)
 		case 5:
 			player.TakePotM()
 		default:
@@ -215,9 +216,9 @@ func combatTrollEtOrcs(player *Character) {
 		case 2:
 			// attaque spécialeeeee
 		case 3:
-			player.takePotS()
+			player.TakePotS()
 		case 4:
-			player.takePotP()
+			player.TakePotP(&ennemiPv)
 		case 5:
 			player.TakePotM()
 		default:

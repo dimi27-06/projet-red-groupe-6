@@ -32,10 +32,10 @@ func (player *Character) shop() {
 				fmt.Println(Pink + "🎉 Vous avez obtenu : Potion de vie (gratuite) !" + Reset)
 				player.FreePotion = false
 			} else {
-				if player.Gold >= 10 {
+				if player.Gold >= 35 {
 					player.addInventory("Potion de vie", 1)
-					player.Gold -= 10
-					fmt.Println("💰 Vous avez acheté une Potion de vie pour 10 écus.")
+					player.Gold -= 35
+					fmt.Println("💰 Vous avez acheté une Potion de vie pour 35 écus.")
 				} else {
 					fmt.Println("❌ Vous n'avez pas assez d'écus pour acheter cette potion.")
 				}

@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"time"
 )
 
 func (player *Character) TakePotS() {
@@ -12,45 +11,37 @@ func (player *Character) TakePotS() {
 			if player.Pv > player.PvMax {
 				player.Pv = player.PvMax
 			}
-			fmt.Println(Pink + "Potion de vie utilisée (quantité -1)" + Reset)
-			fmt.Printf("Nouveau Pv : %d\n", player.Pv)
+			fmt.Println(Pink + "💖 Potion de vie utilisée (quantité -1)" + Reset)
+			fmt.Printf("Nouveau PV : %d/%d\n", player.Pv, player.PvMax)
 
-			player.Inventaire[index].Quantite -= 1
+			player.Inventaire[index].Quantite--
 			if player.Inventaire[index].Quantite <= 0 {
 				player.Inventaire = append(player.Inventaire[:index], player.Inventaire[index+1:]...)
 			}
 			return
 		}
 	}
-	fmt.Println(Red + "Utilisation impossible : potion de vie manquante" + Reset)
+	fmt.Println(Red + "❌ Pas de potion de vie disponible" + Reset)
 }
 
-func (player *Character) TakePotP(orcPv *Character) {
+func (player *Character) TakePotP(enemyPv *int) {
 	for index := range player.Inventaire {
 		if player.Inventaire[index].Nom == "Potion de poison" && player.Inventaire[index].Quantite > 0 {
-<<<<<<< HEAD
-			player.Pv -= 15
-=======
-			orcPv -= 15
->>>>>>> 87b0e833da3fdb9bac6c37b1cf5019d802974853
-			time.Sleep(3 * time.Second)
-			if orcPv <= 0 {
-				combatOrcs.IsDead()
-				return
+			*enemyPv -= 15
+			if *enemyPv < 0 {
+				*enemyPv = 0
 			}
+			fmt.Println(Green + "☠️ Potion de poison utilisée (quantité -1)" + Reset)
+			fmt.Printf("PV de l’ennemi après poison : %d\n", *enemyPv)
 
-			fmt.Println(Green + "Potion de poison utilisée (quantité -1)" + Green)
-			fmt.Printf("Nouveau Pv : %d\n", orcPv)
-			fmt.Printf("Nouveau Pv : %d\n", ennemiPv)
-
-			player.Inventaire[index].Quantite -= 1
+			player.Inventaire[index].Quantite--
 			if player.Inventaire[index].Quantite <= 0 {
 				player.Inventaire = append(player.Inventaire[:index], player.Inventaire[index+1:]...)
 			}
 			return
 		}
 	}
-	fmt.Println(Red + "Utilisation impossible : potion de poison manquante" + Reset)
+	fmt.Println(Red + "❌ Pas de potion de poison disponible" + Reset)
 }
 
 func (player *Character) TakePotM() {
@@ -60,14 +51,15 @@ func (player *Character) TakePotM() {
 			if player.Mana > player.ManaMax {
 				player.Mana = player.ManaMax
 			}
-			fmt.Println(Blue + "Potion de Mana utilisée (quantité -1)" + Reset)
-			fmt.Printf("Nouveau Mana : %d\n", player.Mana)
-			player.Inventaire[index].Quantite -= 1
+			fmt.Println(Blue + "🔮 Potion de mana utilisée (quantité -1)" + Reset)
+			fmt.Printf("Nouveau Mana : %d/%d\n", player.Mana, player.ManaMax)
+
+			player.Inventaire[index].Quantite--
 			if player.Inventaire[index].Quantite <= 0 {
 				player.Inventaire = append(player.Inventaire[:index], player.Inventaire[index+1:]...)
 			}
 			return
 		}
 	}
-	fmt.Println(Red + "Utilisation impossible : potion de Mana manquante" + Reset)
+	fmt.Println(Red + "❌ Pas de potion de mana disponible" + Reset)
 }

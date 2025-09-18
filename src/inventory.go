@@ -36,7 +36,9 @@ func (player *Character) MenuInventory() {
 		case 1:
 			player.TakePotS()
 		case 2:
-			player.TakePotP()
+			var value int
+			player.TakePotP(&value)
+
 		case 3:
 			player.TakePotM()
 		case 0:
