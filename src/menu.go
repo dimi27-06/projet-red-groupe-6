@@ -16,8 +16,14 @@ func (player *Character) MainMenu() {
 		if player.TrollUnlocked {
 			fmt.Printf("\t4 - Sauver les hobbits 2/3 (Combat)\n")
 		}
+		if player.SauronUnlocked {
+			fmt.Printf("\t5 - Combattre SAURON (combat final)\n")
+		}
+
+		fmt.Printf("\t6 - Niveau bonus : Combattre les 9 Nazgûls (déconseillé si histoire non fini)\n")
+
 		if player.ShopUnlocked {
-			fmt.Println("\t5 - Shop")
+			fmt.Println("\t7 - Shop")
 		}
 		fmt.Printf(Red + "\t0 - Quitter\n" + Reset)
 		fmt.Print("Sélectionner un choix : ")
@@ -45,8 +51,22 @@ func (player *Character) MainMenu() {
 				combatTrollEtOrcs(player)
 			} else {
 				fmt.Println(Red + "🚫 Combat non disponible !" + Reset)
+
 			}
 		case 5:
+			if player.SauronUnlocked {
+				combatSauron(player)
+				playSoundAsyncCredits()
+				ClearTerminal()
+				ShowCredits()
+			} else {
+				fmt.Println(Red + "🚫 Combat final non débloqué." + Reset)
+			}
+		case 6:
+			playSoundAsyncNazgul()
+			combatNazguls(player)
+
+		case 7:
 			if player.ShopUnlocked {
 				player.shop()
 			} else {
@@ -59,5 +79,4 @@ func (player *Character) MainMenu() {
 			fmt.Println(Red + "Erreur : choix non valide" + Reset)
 		}
 	}
-
 }

@@ -60,7 +60,7 @@ func (player *Character) addInventory(nom string, quantite int) {
 	player.Inventaire = append(player.Inventaire, Item{Nom: nom, Quantite: quantite})
 }
 
-func (player *Character) removeInventory(nom string, quantite int) {
+func (player *Character) RemoveInventory(nom string, quantite int) {
 	for i, item := range player.Inventaire {
 		if item.Nom == nom {
 			if player.Inventaire[i].Quantite > quantite {
@@ -73,11 +73,11 @@ func (player *Character) removeInventory(nom string, quantite int) {
 	}
 }
 
-func (player *Character) limitInventory() {
+func (player *Character) LimitInventory() {
 	for i := 0; i < len(player.Inventaire); i++ {
 
 		if player.Inventaire[i].Quantite > 10 {
-			fmt.Println("Inventaire plein")
+			fmt.Println(Bold + Blue + "Inventaire plein" + Reset)
 		}
 	}
 }

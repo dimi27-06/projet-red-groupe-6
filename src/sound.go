@@ -60,3 +60,14 @@ func playSoundAsyncDebut() {
 func playSoundAsyncCombat() {
 	playMusic("./assets/Combat.mp3")
 }
+
+func playSoundAsyncSauron() {
+	playMusic("./assets/Sauron.mp3")
+}
+
+func playSoundAsyncCredits() {
+	playMusic("./assets/CREDITS.mp3")
+}
+func playSoundAsyncNazgul() {
+	playMusic("./assets/nazgul.mp3")
+}

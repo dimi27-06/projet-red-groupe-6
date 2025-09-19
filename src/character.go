@@ -34,6 +34,7 @@ type Character struct {
 	SkillDmg       int
 	SkillManaCost  int
 	TrollUnlocked  bool
+	SauronUnlocked bool
 }
 
 // Structure Item
@@ -59,7 +60,7 @@ func (player *Character) initAragorn() {
 		},
 
 		FreePotion: true,
-		Gold:       1000,
+		Gold:       10,
 
 		BaseAttackName: "Coup d’épée",
 		BaseAttackDmg:  20,
@@ -84,17 +85,19 @@ Il est également le compagnon fidèle de Frodon et de la Communauté de l'Annea
 // Initialisation de Legolas
 func (player *Character) initLegolas() {
 	*player = Character{
-		Nom:    "Legolas",
-		Classe: "Elfe",
-		Niveau: 1,
-		Pv:     80,
-		PvMax:  80,
+		Nom:     "Legolas",
+		Classe:  "Elfe",
+		Niveau:  1,
+		Pv:      80,
+		PvMax:   80,
+		Mana:    90,
+		ManaMax: 90,
 		Inventaire: []Item{
 			{"Arc elfique", 1},
 			{"Potion de vie", 0},
 		},
 		FreePotion:     true,
-		Gold:           0,
+		Gold:           10,
 		BaseAttackName: "Tir à l’arc",
 		BaseAttackDmg:  30,
 		SkillName:      "Flèches empoisonnées",
@@ -116,18 +119,20 @@ Il est un combattant hors pair, agile aussi bien sur terre que dans les environn
 // Initialisation de Gimli
 func (player *Character) initGimli() {
 	*player = Character{
-		Nom:    "Gimli",
-		Classe: "Nain",
-		Niveau: 1,
-		Pv:     120,
-		PvMax:  120,
+		Nom:     "Gimli",
+		Classe:  "Nain",
+		Niveau:  1,
+		Pv:      120,
+		PvMax:   120,
+		Mana:    90,
+		ManaMax: 90,
 		Inventaire: []Item{
 			{"Hache de guerre", 1},
 
 			{"Potion de vie", 0},
 		},
 		FreePotion:     true,
-		Gold:           0,
+		Gold:           10,
 		BaseAttackName: "Coup de hache",
 		BaseAttackDmg:  15,
 		SkillName:      "Lancer de nain",
@@ -146,6 +151,48 @@ Gimli représente la fierté et la force du peuple nain, toujours prêt à défe
 `,
 	}
 	typeWriter(player.Description, 4*time.Millisecond)
+}
+
+// Initialisation de Gandoulf le blouf
+func (player *Character) initGandalf() {
+	*player = Character{
+		Nom:     "Gandalf",
+		Classe:  "Maia (magicien pour les mortels)",
+		Niveau:  9999999,
+		Pv:      9999999,
+		PvMax:   9999999,
+		Mana:    9999999,
+		ManaMax: 9999999,
+		Inventaire: []Item{
+			{"Bâton de magicien Narya ", 1},
+
+			{"Narya, l'Anneau de feu", 1},
+		},
+		FreePotion:     true,
+		Gold:           9999999,
+		BaseAttackName: "Coup de bâton",
+		BaseAttackDmg:  999999999,
+		SkillName:      "appel de Gwaihir (le seigneur des aigles)",
+		SkillDmg:       9999999999,
+		SkillManaCost:  1,
+
+		Description: `Dans le silence des terres anciennes, il apparaît,
+Gandalf le Blanc, porteur de lumière et de feu.
+Sa robe immaculée flotte comme un nuage de clarté,
+Son bâton vibre d’une magie qui défie les ténèbres.
+
+Les cœurs tremblent devant sa puissance,
+Et pourtant, son regard apaise et inspire le courage.
+Il est le guide des errants, le protecteur des justes,
+Le souffle qui rallume l’espoir quand tout semble perdu.
+
+Dans chaque bataille, dans chaque conseil,
+Il incarne la sagesse, la force et la lumière éternelle.
+Gandalf le Blanc… l’étoile qui ne s’éteint jamais..
+
+`,
+	}
+	typeWriter(player.Description, 2*time.Millisecond)
 }
 
 // Affichage infos persoooo
@@ -168,6 +215,7 @@ func choisirPersonnage() Character {
 	fmt.Println("1 - Aragorn")
 	fmt.Println("2 - Legolas")
 	fmt.Println("3 - Gimli")
+	fmt.Println("?????????")
 	fmt.Print("Votre choix : ")
 	fmt.Scan(&choix)
 
@@ -178,6 +226,9 @@ func choisirPersonnage() Character {
 		perso.initLegolas()
 	case 3:
 		perso.initGimli()
+	case 667:
+		perso.initGandalf()
+		fmt.Println(Bold, Yellow+"Vous avez débloqué le personnage secret Gandalf le Blanc !"+Reset)
 	default:
 		fmt.Println(Red + "Choix invalide, Aragorn est sélectionné par défaut." + Reset)
 		perso.initAragorn()

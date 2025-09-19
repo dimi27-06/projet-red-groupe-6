@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"math/rand"
 	"time"
 )
 
@@ -117,10 +118,11 @@ Leur mission : les retrouver avant que le maléfique Saroumane ou d’autres cr�
 		}
 
 		var degats int
-		if choix == 1 {
+		switch choix {
+		case 1:
 			degats = player.BaseAttackDmg
-			fmt.Printf("💥 Vous utilisez %s et infligez %d dégâts !\n", player.BaseAttackName, degats)
-		} else if choix == 2 {
+			fmt.Printf("\n💥 Vous utilisez %s et infligez %d dégâts !\n", player.BaseAttackName, degats)
+		case 2:
 			if player.Mana >= player.SkillManaCost {
 				degats = player.SkillDmg
 				player.Mana -= player.SkillManaCost
@@ -129,7 +131,7 @@ Leur mission : les retrouver avant que le maléfique Saroumane ou d’autres cr�
 				fmt.Println(Red + "⚠️ Pas assez de mana ! Vous attaquez normalement." + Reset)
 				degats = player.BaseAttackDmg
 			}
-		} else {
+		default:
 			fmt.Println(Red + "❌ Mauvais choix, attaque de base par défaut." + Reset)
 			degats = player.BaseAttackDmg
 		}
@@ -177,8 +179,8 @@ Leur mission : les retrouver avant que le maléfique Saroumane ou d’autres cr�
 func combatTrollEtOrcs(player *Character) {
 	stopSound()
 	playSoundAsyncCombat()
-	fmt.Println(Bold, Yellow+"\n apres avoir vaincu les orcs notre trio continue leurs route mais La forêt devient plus sombre. Après une courte accalmie, deux Orques, accompagnés d’un Troll, attaquent. "+Reset)
-	time.Sleep(4 * time.Second)
+	histoire2 := Yellow + "\n apres avoir vaincu les orcs notre trio continue leurs route mais La forêt devient plus sombre. Après une courte accalmie, deux Orques, accompagnés d’un Troll, attaquent. " + Reset
+	typeWriter(histoire2, 7*time.Millisecond)
 
 	ennemiPv := 200
 	ennemiDegats := 25
@@ -201,11 +203,11 @@ func combatTrollEtOrcs(player *Character) {
 		}
 
 		fmt.Println(Cyan + "\n=== Tour du joueur ===" + Reset)
-		fmt.Printf("\n1 - %s (dégâts : %d)\n", player.BaseAttackName, player.BaseAttackDmg)
-		fmt.Printf("\n2 - %s (dégâts : %d, coût : %d mana)\n", player.SkillName, player.SkillDmg, player.SkillManaCost)
-		fmt.Printf("\n3 - Potion de vie (vie régénérée : 20, -1 potion de vie)\n")
-		fmt.Printf("\n4 - Potion de poison (inflige : 10 dégâts, -1 potion de poison)\n")
-		fmt.Printf("\n5 - Potion de mana (mana régénéré : 30, -1 potion de mana)\n")
+		fmt.Printf("1 - %s (dégâts : %d)\n", player.BaseAttackName, player.BaseAttackDmg)
+		fmt.Printf("2 - %s (dégâts : %d, coût : %d mana)\n", player.SkillName, player.SkillDmg, player.SkillManaCost)
+		fmt.Printf("3 - Potion de vie (vie régénérée : 20, -1 potion de vie)\n")
+		fmt.Printf("4 - Potion de poison (inflige : 10 dégâts, -1 potion de poison)\n")
+		fmt.Printf("5 - Potion de mana (mana régénéré : 30, -1 potion de mana)\n")
 		fmt.Print("Votre choix : ")
 		var choix int
 		fmt.Scan(&choix)
@@ -225,10 +227,11 @@ func combatTrollEtOrcs(player *Character) {
 			fmt.Println(Red + "❌ Choix invalide !" + Reset)
 		}
 		var degats int
-		if choix == 1 {
+		switch choix {
+		case 1:
 			degats = player.BaseAttackDmg
-			fmt.Printf("\t💥 Vous utilisez %s et infligez %d dégâts !\n", player.BaseAttackName, degats)
-		} else if choix == 2 {
+			fmt.Printf("\n💥 Vous utilisez %s et infligez %d dégâts !\n", player.BaseAttackName, degats)
+		case 2:
 			if player.Mana >= player.SkillManaCost {
 				degats = player.SkillDmg
 				player.Mana -= player.SkillManaCost
@@ -246,8 +249,14 @@ func combatTrollEtOrcs(player *Character) {
 		fmt.Printf("👹 PV du Troll + Orcs : %d\n", ennemiPv)
 
 		if ennemiPv <= 0 {
-			fmt.Println(Green + "🎉 Vous avez vaincu le Troll et ses orcs !" + Reset)
+			fmt.Println(Green + "🎉 Victoire ! Vous avez vaincu le Troll et ses orcs !" + Reset)
 			player.Gold += 200
+			fmt.Println(Yellow + "💰 Vous gagnez 200 pièces d’or !" + Reset)
+			player.SauronUnlocked = true
+			fmt.Println(Cyan + "\n🔔 Le combat final contre SAURON est désormais disponible dans le menu principal !" + Reset)
+			stopSound()
+			playSoundAsyncDebut()
+
 			return
 		}
 
@@ -268,6 +277,236 @@ func combatTrollEtOrcs(player *Character) {
 				playSoundAsyncDebut()
 				return
 			}
+		}
+	}
+}
+
+func combatSauron(player *Character) {
+	stopSound()
+	playSoundAsyncSauron()
+	histoire3 := Red + Bold + "\n⚔️ Après avoir vaincu le Troll et ses orcs, nos héros marchent vers le Mordor.\nDans les flammes de la montagne du Destin, Sauron surgit avec sa masse gigantesque... Le combat final commence !" + Reset
+	typeWriter(histoire3, 7*time.Millisecond)
+	sauronPv := 400
+
+	rnd := rand.New(rand.NewSource(time.Now().UnixNano()))
+
+	for {
+		if sauronPv <= 0 {
+			stopSound()
+			fmt.Println(Green + Bold + "🎉 Victoire ultime ! Vous avez terrassé Sauron et sauvé la Terre du Milieu et les hobbits!" + Reset)
+			player.Gold += 500
+			fmt.Println(Yellow + "💰 Récompense : 500 pièces d’or !" + Reset)
+			player.SauronUnlocked = true
+			playSoundAsyncDebut()
+			return
+		}
+
+		if player.Pv <= 0 {
+			player.IsDead()
+			if player.Pv <= 0 {
+				stopSound()
+				fmt.Println(Red + Bold + "☠️ Sauron vous a anéanti... les hobbits sont perdu." + Reset)
+				gameOver()
+				return
+			}
+		}
+
+		fmt.Println(Cyan + "\n=== Tour du joueur ===" + Reset)
+		fmt.Printf("1 - %s (dégâts : %d)\n", player.BaseAttackName, player.BaseAttackDmg)
+		fmt.Printf("2 - %s (dégâts : %d, coût : %d mana)\n", player.SkillName, player.SkillDmg, player.SkillManaCost)
+		fmt.Printf("3 - Potion de vie (vie régénérée : 20, -1 potion de vie)\n")
+		fmt.Printf("4 - Potion de poison (inflige : 10 dégâts, -1 potion de poison)\n")
+		fmt.Printf("5 - Potion de mana (mana régénéré : 30, -1 potion de mana)\n")
+		fmt.Print("Votre choix : ")
+
+		var choix int
+		fmt.Scan(&choix)
+
+		switch choix {
+		case 1:
+			degats := player.BaseAttackDmg
+			sauronPv -= degats
+			fmt.Printf("\n⚔️ Vous utilisez %s et infligez %d dégâts à Sauron !\n", player.BaseAttackName, degats)
+		case 2:
+			if player.Mana >= player.SkillManaCost {
+				degats := player.SkillDmg
+				player.Mana -= player.SkillManaCost
+				sauronPv -= degats
+				fmt.Printf("\n🔥 Vous utilisez %s et infligez %d dégâts à Sauron ! (Mana : %d/%d)\n", player.SkillName, degats, player.Mana, player.ManaMax)
+			} else {
+				fmt.Println(Red + "⚠️ Pas assez de mana ! Vous attaquez normalement." + Reset)
+				degats := player.BaseAttackDmg
+				sauronPv -= degats
+				fmt.Printf("\n⚔️ Attaque de base : %d dégâts à Sauron.\n", degats)
+			}
+		case 3:
+			player.TakePotS()
+		case 4:
+			player.TakePotP(&sauronPv)
+		case 5:
+			player.TakePotM()
+		default:
+			fmt.Println(Red + "❌ Choix invalide, attaque de base par défaut !" + Reset)
+			degats := player.BaseAttackDmg
+			sauronPv -= degats
+			fmt.Printf("\n⚔️ Attaque de base : %d dégâts à Sauron.\n", degats)
+		}
+
+		if sauronPv < 0 {
+			sauronPv = 0
+		}
+		fmt.Printf("👹 PV restants de Sauron : %d\n", sauronPv)
+
+		if sauronPv <= 0 {
+			stopSound()
+			fmt.Println(Green + Bold + "🎉 Vous avez terrassé Sauron ! La lumière triomphe des ténèbres !" + Reset)
+			return
+		}
+
+		fmt.Println(Red + "\n=== Tour de Sauron ===" + Reset)
+
+		attaque := rnd.Intn(3)
+		switch attaque {
+		case 0:
+			degats := 40
+			player.Pv -= degats
+			fmt.Printf(Red+Bold+"💀 Sauron frappe avec sa masse et inflige %d dégâts ! (PV : %d/%d)\n"+Reset,
+				degats, player.Pv, player.PvMax)
+		case 1:
+			degats := 60
+			player.Pv -= degats
+			fmt.Printf(Red+Bold+"💥 Sauron utilise une FRAPPE ÉCRASANTE et inflige %d dégâts dévastateurs ! (PV : %d/%d)\n"+Reset,
+				degats, player.Pv, player.PvMax)
+		case 2:
+			degats := 50
+			player.Pv -= degats
+			player.Mana -= 20
+			if player.Mana < 0 {
+				player.Mana = 0
+			}
+			fmt.Printf(Red+Bold+"🔥 Sauron invoque les FLAMMES DU MORDOR et inflige %d dégâts ! Vous perdez aussi 20 mana ! (PV : %d/%d | Mana : %d/%d)\n"+Reset,
+				degats, player.Pv, player.PvMax, player.Mana, player.ManaMax)
+		}
+
+		if player.Pv < 0 {
+			player.Pv = 0
+		}
+
+		if sauronPv <= 0 {
+			stopSound()
+			fmt.Println(Green + Bold + "🎉 Vous avez terrassé Sauron ! La lumière triomphe des ténèbres !" + Reset)
+			time.Sleep(2 * time.Second)
+		}
+
+	}
+
+}
+
+func combatNazguls(player *Character) {
+	stopSound()
+	playSoundAsyncNazgul()
+	histoire := Red + Bold + "\n💀 Niveau Bonus ! Les 9 Nazgûls apparaissent pour venger Sauron ! Préparez-vous à un combat épique..." + Reset
+	typeWriter(histoire, 7*time.Millisecond)
+
+	nazgulsPv := 500
+	nazgulsDegats := 35
+
+	rnd := rand.New(rand.NewSource(time.Now().UnixNano()))
+
+	for {
+		if nazgulsPv <= 0 {
+			fmt.Println(Green + Bold + "🎉 Victoire ultime ! Vous avez terrassé les 9 Nazgûls !" + Reset)
+			player.Gold += 1000
+			fmt.Println(Yellow + "💰 Récompense : 1000 pièces d’or !" + Reset)
+			stopSound()
+			playSoundAsyncDebut()
+			return
+		}
+
+		if player.Pv <= 0 {
+			player.IsDead()
+			if player.Pv <= 0 {
+				stopSound()
+				fmt.Println(Red + Bold + "☠️ Les Nazgûls vous ont anéanti... les hobbits sont perdus pour de bon." + Reset)
+				gameOver()
+				return
+			}
+		}
+
+		fmt.Println(Cyan + "\n=== Tour du joueur ===" + Reset)
+		fmt.Printf("1 - %s (dégâts : %d)\n", player.BaseAttackName, player.BaseAttackDmg)
+		fmt.Printf("2 - %s (dégâts : %d, coût : %d mana)\n", player.SkillName, player.SkillDmg, player.SkillManaCost)
+		fmt.Printf("3 - Potion de vie (vie régénérée : 20, -1 potion de vie)\n")
+		fmt.Printf("4 - Potion de poison (inflige : 10 dégâts, -1 potion de poison)\n")
+		fmt.Printf("5 - Potion de mana (mana régénéré : 30, -1 potion de mana)\n")
+		fmt.Print("Votre choix : ")
+
+		var choix int
+		fmt.Scan(&choix)
+
+		var degats int
+		switch choix {
+		case 1:
+			degats = player.BaseAttackDmg
+			nazgulsPv -= degats
+			fmt.Printf("\n⚔️ Vous utilisez %s et infligez %d dégâts aux Nazgûls !\n", player.BaseAttackName, degats)
+		case 2:
+			if player.Mana >= player.SkillManaCost {
+				degats = player.SkillDmg
+				player.Mana -= player.SkillManaCost
+				nazgulsPv -= degats
+				fmt.Printf("\n🔥 Vous utilisez %s et infligez %d dégâts aux Nazgûls ! (Mana : %d/%d)\n", player.SkillName, degats, player.Mana, player.ManaMax)
+			} else {
+				fmt.Println(Red + "⚠️ Pas assez de mana ! Attaque normale." + Reset)
+				degats = player.BaseAttackDmg
+				nazgulsPv -= degats
+				fmt.Printf("\n⚔️ Attaque de base : %d dégâts aux Nazgûls.\n", degats)
+			}
+		case 3:
+			player.TakePotS()
+		case 4:
+			player.TakePotP(&nazgulsPv)
+		case 5:
+			player.TakePotM()
+		default:
+			fmt.Println(Red + "❌ Choix invalide, attaque de base par défaut !" + Reset)
+			degats = player.BaseAttackDmg
+			nazgulsPv -= degats
+			fmt.Printf("\n⚔️ Attaque de base : %d dégâts aux Nazgûls.\n", degats)
+		}
+
+		if nazgulsPv < 0 {
+			nazgulsPv = 0
+		}
+		fmt.Printf("👹 PV restants des Nazgûls : %d\n", nazgulsPv)
+
+		fmt.Println(Red + "\n=== Tour des Nazgûls ===" + Reset)
+		nazgulsAttack := rnd.Intn(3)
+		var nazgulsDmg int
+		switch nazgulsAttack {
+		case 0:
+			nazgulsDmg = nazgulsDegats
+			player.Pv -= nazgulsDmg
+			fmt.Printf(Red+Bold+"💀 Les Nazgûls frappent %s pour %d dégâts ! (PV : %d/%d)\n"+Reset,
+				player.Nom, nazgulsDmg, player.Pv, player.PvMax)
+		case 1:
+			nazgulsDmg = nazgulsDegats + 20
+			player.Pv -= nazgulsDmg
+			fmt.Printf(Red+Bold+"💥 Les Nazgûls utilisent une attaque sombre et infligent %d dégâts ! (PV : %d/%d)\n"+Reset,
+				nazgulsDmg, player.Pv, player.PvMax)
+		case 2:
+			nazgulsDmg = nazgulsDegats + 10
+			player.Pv -= nazgulsDmg
+			player.Mana -= 15
+			if player.Mana < 0 {
+				player.Mana = 0
+			}
+			fmt.Printf(Red+Bold+"🔥 Les Nazgûls invoquent l’ombre du Mordor et infligent %d dégâts ! Mana perdue : 15 (PV : %d/%d | Mana : %d/%d)\n"+Reset,
+				nazgulsDmg, player.Pv, player.PvMax, player.Mana, player.ManaMax)
+		}
+
+		if player.Pv < 0 {
+			player.Pv = 0
 		}
 	}
 }
