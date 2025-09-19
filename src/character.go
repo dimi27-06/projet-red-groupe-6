@@ -60,7 +60,7 @@ func (player *Character) initAragorn() {
 		},
 
 		FreePotion: true,
-		Gold:       10,
+		Gold:       25,
 
 		BaseAttackName: "Coup d’épée",
 		BaseAttackDmg:  20,
@@ -97,7 +97,7 @@ func (player *Character) initLegolas() {
 			{"Potion de vie", 0},
 		},
 		FreePotion:     true,
-		Gold:           10,
+		Gold:           25,
 		BaseAttackName: "Tir à l’arc",
 		BaseAttackDmg:  30,
 		SkillName:      "Flèches empoisonnées",
@@ -132,7 +132,7 @@ func (player *Character) initGimli() {
 			{"Potion de vie", 0},
 		},
 		FreePotion:     true,
-		Gold:           10,
+		Gold:           25,
 		BaseAttackName: "Coup de hache",
 		BaseAttackDmg:  15,
 		SkillName:      "Lancer de nain",
